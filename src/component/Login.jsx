@@ -5,16 +5,17 @@ import styles from "../css/style.module.css";
 import axios from "axios";
 
 const Login = (props) => {
-  console.log(props.mola);
   const [users, setUsers] = useState({});
-  const [Logined, setLogined] = useState(false);
-  console.log(users);
-  console.log(Logined);
-  useEffect(() => {
-    axios.get("http://localhost:3004/signup").then((response) => {
-      console.log(response);
+  const getgo = async () => {
+    try {
+      const response = await axios.get("http://localhost:3004/signup");
       setUsers(response.data);
-    });
+    } catch (err) {
+      console.log("Error >>", err);
+    }
+  };
+  useEffect(() => {
+    getgo();
   }, []);
   console.log(users);
   const navigator = useNavigate();
@@ -38,12 +39,11 @@ const Login = (props) => {
       ) {
         console.log(index);
         console.log("login ok");
-        props.userAdd(
-          users[index].userinfo.userid,
-          users[index].userinfo.nickname
-        );
-        setLogined(true);
+        props.userAdd(id, pw);
         navigator("/");
+        return;
+      } else {
+        alert("아이디나 비밀번호를 확인하세요.");
       }
       console.log(users[index]);
       index++;

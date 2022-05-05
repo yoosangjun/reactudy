@@ -11,14 +11,12 @@ import Signup from "./component/Signup";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </React.StrictMode>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/signin" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   </BrowserRouter>
 );
 

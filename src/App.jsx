@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./component/Navbar";
 import Home from "./component/Home";
+import Login from "./component/Login";
 
 const App = () => {
-  const [show, setShow] = useState(true);
   const [user, setUser] = useState({});
-  const mola = "몰라";
+  const [show, setShow] = useState(false);
+  const mola = 2;
   const userAdd = (userid, nickname) => {
     setUser({
       userid,
@@ -13,18 +14,14 @@ const App = () => {
     });
     console.log(user);
   };
-
+  console.log(mola);
   useEffect(() => {
     console.log(user);
-  }, [user]);
+  }, []);
 
-  const showing = (show) => {
-    setShow(show);
-    console.log(show);
-  };
   return (
     <>
-      <Navbar show={show} showing={showing} userAdd={userAdd} mola={mola} />
+      <Navbar userAdd={userAdd} />
       <Home />
     </>
   );

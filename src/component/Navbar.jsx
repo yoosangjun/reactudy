@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "../css/style.module.css";
 
 const Navbar = (props) => {
+  const mola = props.mola;
+  console.log(mola);
   return (
     <nav className={styles.navbar}>
       <div className={styles.smallnavbar}>
@@ -18,9 +20,9 @@ const Navbar = (props) => {
         <Link
           to={{
             pathname: "/signin",
-            state: props.mola,
           }}
           className={styles.smalllink}
+          state={props.userAdd}
         >
           로그인
         </Link>
