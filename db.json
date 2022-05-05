@@ -5,7 +5,7 @@
         "createdate": 1651668532159,
         "userid": "love2fam@nate.com",
         "pw": "1234",
-        "nickname": "1234"
+        "nickname": "상준이"
       },
       "id": 1
     },
@@ -17,6 +17,16 @@
         "nickname": "마봉구"
       },
       "id": 2
+    },
+    {
+      "userinfo": {
+        "createdate": 1651746977385,
+        "userid": "dobonggu",
+        "pw": "alxlssha",
+        "email": "dobonggu@naver.com",
+        "nickname": "마봉구"
+      },
+      "id": 3
     }
   ]
 }

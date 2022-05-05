@@ -6,10 +6,10 @@ import styles from "../css/style.module.css";
 
 const Signup = () => {
   const navigator = useNavigate();
-  let id, pw, verifypw, nickname, email;
+  let userid, pw, verifypw, nickname, email;
   const onChangeID = (e) => {
-    id = e.target.value;
-    console.log(id);
+    userid = e.target.value;
+    console.log(userid);
   };
   const onChangeNick = (e) => {
     nickname = e.target.value;
@@ -29,17 +29,21 @@ const Signup = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/signup", {
+    if (pw !== verifypw) {
+      alert("비밀번호를 확인하세요");
+      return;
+    }
+    axios.post("http://localhost:3004/signup", {
       userinfo: {
         createdate: Date.now(),
-        id,
+        userid,
         pw,
         email,
         nickname,
       },
     });
     alert("가입이 완료되었습니다.");
-    navigator("/");
+    navigator("/signin");
   };
   return (
     <>

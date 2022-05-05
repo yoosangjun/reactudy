@@ -16,13 +16,17 @@ const Login = (props) => {
   };
   useEffect(() => {
     getgo();
+    return () => {
+      setUsers(null);
+      console.log(users);
+    };
   }, []);
   console.log(users);
   const navigator = useNavigate();
-  let id, pw;
+  let userid, pw, nickname;
   const onChangeID = (e) => {
-    id = e.target.value;
-    console.log(id);
+    userid = e.target.value;
+    console.log(userid);
   };
   const onChangePW = (e) => {
     pw = e.target.value;
@@ -31,22 +35,30 @@ const Login = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let index = 0;
-    console.log(users[index].userinfo.userid === id);
+    console.log(users[index].userinfo.userid === userid);
     while (index < users.length) {
+      console.log(users[index].userinfo.nickname);
       if (
-        users[index].userinfo.userid === id &&
+        users[index].userinfo.userid === userid &&
         users[index].userinfo.pw === pw
       ) {
+        nickname = users[index].userinfo.nickname;
         console.log(index);
+        console.log(users[index].userinfo.nickname);
+        console.log(nickname);
         console.log("login ok");
-        props.userAdd(id, pw);
-        navigator("/");
+        navigator("/", {
+          state: {
+            userid,
+            nickname,
+          },
+        });
+        index++;
         return;
       } else {
         alert("아이디나 비밀번호를 확인하세요.");
+        return;
       }
-      console.log(users[index]);
-      index++;
     }
   };
   return (
@@ -59,9 +71,9 @@ const Login = (props) => {
         <h5 className={styles.logo__dec}>구리지만 괜찮아...</h5>
         <form onSubmit={onSubmit} className={styles.form}>
           <div className={styles.inputbox}>
-            <span>이메일 주소</span>
+            <span>아이디</span>
             <input
-              type="email"
+              type="text"
               name="id"
               placeholder="ex) love2ysj@nate.com"
               onChange={onChangeID}

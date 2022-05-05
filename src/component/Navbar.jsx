@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../css/style.module.css";
 
 const Navbar = (props) => {
-  const mola = props.mola;
-  console.log(mola);
+  const [show, setShow] = useState(false);
+  console.log(props.user);
+  useEffect(() => {
+    props.user ? setShow(true) : setShow(false);
+    // props.user === undefined ? setShow(true) : setShow(false);
+  }, [props.user]);
   return (
     <nav className={styles.navbar}>
       <div className={styles.smallnavbar}>
@@ -17,15 +21,27 @@ const Navbar = (props) => {
         <Link to="/signup" className={styles.smalllink}>
           회원가입
         </Link>
-        <Link
-          to={{
-            pathname: "/signin",
-          }}
-          className={styles.smalllink}
-          state={props.userAdd}
-        >
-          로그인
-        </Link>
+        {!show && (
+          <Link
+            to={{
+              pathname: "/signin",
+            }}
+            className={styles.smalllink}
+          >
+            로그인
+          </Link>
+        )}
+        {show && (
+          <Link
+            to={{
+              pathname: "/",
+            }}
+            state={{}}
+            className={styles.smalllink}
+          >
+            로그아웃
+          </Link>
+        )}
       </div>
       <div className={styles.mainnavbar}>
         <div>
