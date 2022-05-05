@@ -1,0 +1,22 @@
+{
+  "signup": [
+    {
+      "userinfo": {
+        "createdate": 1651668532159,
+        "userid": "love2fam@nate.com",
+        "pw": "1234",
+        "nickname": "1234"
+      },
+      "id": 1
+    },
+    {
+      "userinfo": {
+        "createdate": 1651668617172,
+        "userid": "bong9@naver.com",
+        "pw": "qhdrn",
+        "nickname": "마봉구"
+      },
+      "id": 2
+    }
+  ]
+}
