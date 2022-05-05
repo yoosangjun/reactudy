@@ -4,17 +4,19 @@ import Navbar from "./Navbar";
 import styles from "../css/style.module.css";
 import axios from "axios";
 
-const Login = () => {
-  const [user, setUser] = useState({});
+const Login = (props) => {
+  console.log(props.mola);
+  const [users, setUsers] = useState({});
   const [Logined, setLogined] = useState(false);
-  console.log(user);
+  console.log(users);
+  console.log(Logined);
   useEffect(() => {
-    axios.get("http://localhost:3000/signup").then((response) => {
+    axios.get("http://localhost:3004/signup").then((response) => {
       console.log(response);
-      setUser(response.data);
+      setUsers(response.data);
     });
   }, []);
-  console.log(user);
+  console.log(users);
   const navigator = useNavigate();
   let id, pw;
   const onChangeID = (e) => {
@@ -27,10 +29,24 @@ const Login = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    if (user.id === id && user.pw === pw) {
-      console.log("login ok");
-      setLogined(true);
-      navigator("/");
+    let index = 0;
+    console.log(users[index].userinfo.userid === id);
+    while (index < users.length) {
+      if (
+        users[index].userinfo.userid === id &&
+        users[index].userinfo.pw === pw
+      ) {
+        console.log(index);
+        console.log("login ok");
+        props.userAdd(
+          users[index].userinfo.userid,
+          users[index].userinfo.nickname
+        );
+        setLogined(true);
+        navigator("/");
+      }
+      console.log(users[index]);
+      index++;
     }
   };
   return (

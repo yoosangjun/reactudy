@@ -12,10 +12,16 @@ const Navbar = (props) => {
         <Link to="/" className={styles.smalllink}>
           마이페이지
         </Link>
-        <Link to="./signup" className={styles.smalllink}>
+        <Link to="/signup" className={styles.smalllink}>
           회원가입
         </Link>
-        <Link to="./signin" className={styles.smalllink}>
+        <Link
+          to={{
+            pathname: "/signin",
+            state: props.mola,
+          }}
+          className={styles.smalllink}
+        >
           로그인
         </Link>
       </div>
