@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import styles from "../css/style.module.css";
@@ -6,24 +6,34 @@ import axios from "axios";
 
 const Login = (props) => {
   const [users, setUsers] = useState({});
-  const getgo = async () => {
+  const [db, setDb] = useState(false);
+  console.log(db);
+  const getGo = async () => {
     try {
       const response = await axios.get("http://localhost:3004/signup");
       setUsers(response.data);
+      users ? setDb(true) : setDb(false);
+      console.log(`db 겟스타트 완료 정보 => `, users);
     } catch (err) {
       console.log("Error >>", err);
     }
   };
   useEffect(() => {
-    getgo();
+    console.log(`Login 페이지 첫 실행 db데이터 겟 스타트`);
+    getGo();
     return () => {
+      //해당 페이지를 벗어날때 === 아직 로그아웃을 구현하지 않아서 해당 데이터를 지움
       setUsers(null);
+      console.log(`페이지 벗어날때 정보 => `);
       console.log(users);
     };
-  }, []);
-  console.log(users);
+  }, [db]);
+
   const navigator = useNavigate();
-  let userid, pw, nickname;
+  let userid,
+    pw,
+    nickname,
+    index = 0;
   const onChangeID = (e) => {
     userid = e.target.value;
     console.log(userid);
@@ -32,9 +42,7 @@ const Login = (props) => {
     pw = e.target.value;
     console.log(pw);
   };
-  const onSubmit = (e) => {
-    e.preventDefault();
-    let index = 0;
+  const Loginlogic = useCallback(() => {
     console.log(users[index].userinfo.userid === userid);
     while (index < users.length) {
       console.log(users[index].userinfo.nickname);
@@ -46,6 +54,7 @@ const Login = (props) => {
         console.log(index);
         console.log(users[index].userinfo.nickname);
         console.log(nickname);
+        console.log(userid);
         console.log("login ok");
         navigator("/", {
           state: {
@@ -60,6 +69,10 @@ const Login = (props) => {
         return;
       }
     }
+  }, [users]);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    Loginlogic();
   };
   return (
     <>

@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "@fortawesome/fontawesome-free/js/all.js";
 import Login from "./component/Login";
+import Logout from "./component/Logout";
 import Home from "./component/Home";
 import Signup from "./component/Signup";
 
@@ -16,6 +17,7 @@ root.render(
       <Route path="/signin" element={<Login />} />
       <Route path="/home" element={<Home />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/logout" element={<Logout />} />
     </Routes>
   </BrowserRouter>
 );

@@ -4,7 +4,6 @@ import styles from "../css/style.module.css";
 
 const Navbar = (props) => {
   const [show, setShow] = useState(false);
-  console.log(props.user);
   useEffect(() => {
     props.user ? setShow(true) : setShow(false);
     // props.user === undefined ? setShow(true) : setShow(false);
@@ -18,9 +17,16 @@ const Navbar = (props) => {
         <Link to="/" className={styles.smalllink}>
           마이페이지
         </Link>
-        <Link to="/signup" className={styles.smalllink}>
-          회원가입
-        </Link>
+        {!show && (
+          <Link to="/signup" className={styles.smalllink}>
+            회원가입
+          </Link>
+        )}
+        {show && (
+          <Link to="/" className={styles.smalllink}>
+            홈으로
+          </Link>
+        )}
         {!show && (
           <Link
             to={{
@@ -34,7 +40,7 @@ const Navbar = (props) => {
         {show && (
           <Link
             to={{
-              pathname: "/",
+              pathname: "/logout",
             }}
             state={{}}
             className={styles.smalllink}
