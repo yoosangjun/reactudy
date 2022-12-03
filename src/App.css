@@ -1,3 +1,28 @@
-.Link {
+.Appbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 1000px;
+  text-align: center;
+  padding: 30px;
+}
+
+.mainimg {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
+.Profilebox {
+}
+
+.btn {
+  padding: 10px 30px;
+  border-radius: 20px;
+  background-color: aqua;
+  /* color: white; */
+  border: none;
+  cursor: pointer;
   margin: 10px;
 }
